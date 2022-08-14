@@ -13,10 +13,10 @@ export class ShowRepository {
   }
 
   async updateShow(show: show): Promise<void> {
-    await this.db.run('UPDATE show SET show.name = ? WHERE show.id = ?', show.name, show.id);
+    await this.db.run('UPDATE shows SET show.name = ? AND show.image_src = ? AND show.hidden = ? WHERE show.id = ?', show.name, show.image_src, show.hidden, show.id);
   }
 
   async createShow(show: show): Promise<void> {
-    await this.db.run('INSERT INTO show(id, name) VALUES(?, ?)', show.id, show.name);
+    await this.db.run('INSERT INTO shows(id, name, image_src, hidden) VALUES(?, ?, ?, ?)', show.id, show.name, show.image_src, show.hidden);
   }
 }

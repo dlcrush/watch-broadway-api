@@ -6,11 +6,9 @@ export class ShowsController {
 
   constructor() {
     this.service = new ShowService();
-    console.log(this.service);
   }
 
   async all(req: express.Request, res: express.Response) {
-    console.log('this.service', this);
     res.send({
       data: {
         shows: await this.service.getAllShows()
@@ -21,7 +19,9 @@ export class ShowsController {
   async create(req: express.Request, res: express.Response) {
     await this.service.createShow({
       id: req.body.id,
-      name: req.body.name
+      name: req.body.name,
+      image_src: req.body.image_src,
+      hidden: req.body.hidden === true
     });
 
     res.send({
@@ -34,7 +34,9 @@ export class ShowsController {
   async update(req: express.Request, res: express.Response) {
     await this.service.updateShow(req.params.id, {
       id: req.body.id,
-      name: req.body.name
+      name: req.body.name,
+      image_src: req.body.image_src,
+      hidden: req.body.hidden === true
     });
 
     res.send({

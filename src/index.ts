@@ -3,6 +3,7 @@ import express from "express";
 import routes from "./routes/v1";
 import cors from 'cors';
 import compression from 'compression';
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(compression());
+app.use(bodyParser());
 
 app.use('/api/v1', routes);
 

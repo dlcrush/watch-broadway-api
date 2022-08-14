@@ -9,7 +9,7 @@ export class ShowService {
   }
 
   async getAllShows(): Promise<show[]> {
-    return this.repo.getAllShows();
+    return (await this.repo.getAllShows()).map(s => this.transform(s));
   }
 
   async updateShow(id: string, show: show): Promise<void> {
@@ -22,5 +22,9 @@ export class ShowService {
 
   async createShow(show: show): Promise<void> {
     await this.repo.createShow(show);
+  }
+
+  protected transform(show: show): show {
+    return {... show, hidden: !!show.hidden};
   }
 }

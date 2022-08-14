@@ -10,7 +10,6 @@ export class sqlite {
   async all<T>(sql: string, ...params: any[]): Promise<T[]> {
     return new Promise((resolve, reject) => {
       this.db.all(sql, params, (error: any, rows: T[]) => {
-        console.log('error', error);
         if (error) {
           reject(error);
         }
