@@ -12,8 +12,12 @@ export class ShowRepository {
     return this.db.all('SELECT * FROM shows');
   }
 
+  async get(id: string): Promise<show|undefined> {
+    return this.db.get('SELECT * from shows where id = ?', id);
+  }
+
   async updateShow(show: show): Promise<void> {
-    await this.db.run('UPDATE shows SET show.name = ? AND show.image_src = ? AND show.hidden = ? WHERE show.id = ?', show.name, show.image_src, show.hidden, show.id);
+    await this.db.run('UPDATE shows SET name = ?, image_src = ?, hidden = ? WHERE id = ?', show.name, show.image_src, +show.hidden, show.id);
   }
 
   async createShow(show: show): Promise<void> {

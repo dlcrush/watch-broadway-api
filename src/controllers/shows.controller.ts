@@ -45,4 +45,12 @@ export class ShowsController {
       }
     });
   }
+
+  async get(req: express.Request, res: express.Response) {
+    res.send({
+      data: {
+        show: await this.service.getShow(req.params.id)
+      }
+    });
+  }
 }
